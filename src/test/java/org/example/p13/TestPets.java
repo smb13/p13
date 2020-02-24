@@ -12,20 +12,26 @@ public class TestPets {
     @Test
     public void TestPetsFight () {
         Mouse mockMouse = Mockito.mock(Mouse.class);
-        Mockito.when(mockMouse.getStrength()).thenReturn(10);
-        Mockito.when(mockMouse.getName()).thenReturn("mockMikky");
+        Mockito.when(mockMouse.getStrength()).thenReturn(1);
+        Mockito.when(mockMouse.getName()).thenReturn("Mikky");
+
+        Dog mockDog = Mockito.mock(Dog.class);
+        Mockito.when(mockDog.getStrength()).thenReturn(3);
+        Mockito.when(mockDog.getName()).thenReturn("Bobik");
+
 
         ApplicationContext ctx = new AnnotationConfigApplicationContext
                 (AppConfiguration.class);
         Cat cat = ctx.getBean("cat", Cat.class);
-        Dog dog = ctx.getBean("dog", Dog.class);
 
-//        cat.fight(mockMouse);
-//        dog.fight(mockMouse);
+        assertEquals("Кошка побеждает мышь.", cat.fight(mockMouse), 1);
+        assertEquals("Кошка проигрывает собаке.", cat.fight(mockDog), -1);
+        assertEquals("Кошка побеждает мышь.", cat.fight(cat), 0);
 
-        assertEquals("Мышь побеждает кошку.", cat.fight(mockMouse), -1);
-        assertEquals("Мышь побеждает собаку.", dog.fight(mockMouse), -1);
+        Mockito.when(mockDog.fight(cat)).thenReturn(1);
+        Mockito.when(mockDog.fight(mockMouse)).thenReturn(1);
+
+        assertEquals("Собака побеждает кошку.", mockDog.fight(cat), 1);
+        assertEquals("Собака побеждает мышь.", mockDog.fight(mockMouse), 1);
     }
-
-
 }

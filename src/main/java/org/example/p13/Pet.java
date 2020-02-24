@@ -13,11 +13,11 @@ public class Pet {
 
     public int fight (Pet pet){
         if (this.getStrength() > pet.getStrength()) {
-            System.out.println(this.getClass().getSimpleName() + " " + this.name + " won, " + pet.getClass().getSimpleName().toLowerCase() + " " + pet.name + " lost.");
+            System.out.println(this.getName() + " won, " + " " + pet.getName() + " lost.");
         } else if (this.getStrength() < pet.getStrength()) {
-            System.out.println(pet.getClass().getSimpleName() + " " + pet.name + " won, " + this.getClass().getSimpleName().toLowerCase() + " " + this.name + " lost.");
+            System.out.println(pet.getName() + " won, " + this.getName() + " lost.");
         } else {
-            System.out.println("There is draw between " + this.getClass().getSimpleName() + " " + this.name + " and " + pet.getClass().getSimpleName().toLowerCase() + " " + pet.name + ".");
+            System.out.println("There is draw between " + this.getName() + " and " + pet.getName() + ".");
         }
         return this.getStrength() > pet.getStrength() ? 1 : this.getStrength() < pet.getStrength() ? -1 : 0;
     }
